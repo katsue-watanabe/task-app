@@ -5,18 +5,20 @@
   <div class="col-md-7" >
     <div class="center jumbotron" id="top-main" >
     <h1 id="top-main-title" >TaskApp</h1>
-　  <p>Task　APPは簡易ToDo管理ツールです。</p>
+　  <p>TaskAPPは簡易ToDo管理ツールです。</p>
 　  <p>↓↓初めてのご利用↓↓</p>
-　　  <center><%= link_to "アカウント作成", signup_path, class: "btn btn-lg btn-success" %></center>
-　　  <center>
-　　    <%= link_to "ゲストログイン（管理者権限）", signup_path, class: "btn btn-red btn-block" %>
-　　    <%= link_to "ゲストログイン（一般権限）", signup_path, class: "btn btn-orange" %>
-　　  </center>
+　　<center><%= link_to "アカウント作成", signup_path, class: "btn btn-lg btn-success" %></center>
+　　  <div class="form-group row justify-content-center">
+　　    <div>
+　        <%= link_to "ゲストログイン（管理者権限）", login_path, class: "btn btn-md btn-danger" %>
+　        <%= link_to "ゲストログイン（一般権限）", login_path, class: "btn btn-md btn-warning" %>
+　      </div>
+　　  </div>
     </div>
   </div>
    
   <div class="col-md-4">
-  <h1>ログイン</h1>
+  <h1>ログイン</h1> 
     
     <%= form_with(scope: :session, url: login_path, local: true) do |f| %>
 
