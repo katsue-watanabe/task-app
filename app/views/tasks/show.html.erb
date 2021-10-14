@@ -7,25 +7,25 @@
       <table class="table table-bordered", id= "table-task">
         <tbody>
           <tr>
-            <th class="active col-md-2"><%= Task_human_attrivte_name :id %></th>
+            <th class="active col-md-2"><%= Task.human_attribute_name :id %></th>
             <td class="col-md-10"><%= @task.id %></td>
           </tr>
           <tr>
-            <th class="active"><%= Task_human_attrivte_name :name %></th>
+            <th class="active"><%= Task.human_attribute_name :name %></th>
             <td><%= @task.name %></td>
           </tr>
           <tr>
-            <th class="active"><%= Task_human_attrivte_name :description %></th>
+            <th class="active"><%= Task.human_attribute_name :description %></th>
             <td>
-              <%= auto_link(safe_join(@task.description.split("\n"), tag(:br))) %>
+              <%= autoload(safe_join(@task.description.split("\n"), tag(:br))) %>
             </td>
           </tr>
           <tr>
-            <th class="active"><%= Task_human_attrivte_name :created_at %></th>
+            <th class="active"><%= Task.human_attribute_name :created_at %></th>
             <td><%= l(@task.created_at, format: :long) %></td>
           </tr>
           <tr>
-            <th class="avtive"><%= Task_human_attrivte_name :updated_at %></th>
+            <th class="avtive"><%= Task.human_attribute_name :updated_at %></th>
             <td><%= l(@task.updatde_at, format: :long) %></td>
           </tr>
         </tbody>

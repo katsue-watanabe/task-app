@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_user
-  before_action :set_task, only[:show, :edit, :update, :destroy]
+  before_action :set_task, only: %i(show edit update destroy)
   before_action :logged_in_user
   before_action :correct_user
   
@@ -12,7 +12,10 @@ class TasksController < ApplicationController
   end
 
   def new
-    @task = Task.new
+    if logged_in? && !current_user.admin?
+      flash[:info] = 'すでにログインしています。'	
+      redirect_to current_user	
+    end
   end
 
   def create
@@ -53,6 +56,17 @@ class TasksController < ApplicationController
       @user = User.find(params[:user_id])
     end
     
+    def logged_in_user
+      unless logged_in?
+        flash[:danger]
+        redirect_to login_url
+      end
+    end
+    
+    def correct_user
+      redirect_to(root_url) unless current_user?(@user)
+    end
+    
     def set_task
       unless @task = @user.tasks.find_by(id: params[:id])
       flash[:danger] = "権限がありません。"
@@ -60,3 +74,6 @@ class TasksController < ApplicationController
       end
     end
 end
+
+
+
