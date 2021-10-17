@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :logged_in_user, only: [:index, :show, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:indeX, :show, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit,  :update]
   before_action :admin_user, only: :destroy
   
@@ -16,10 +16,10 @@ class UsersController < ApplicationController
   end
   
   def create
-    @user = User.new(user_params)
+    @user = User.new(name: params[:name], email: params[:email])
     if @user.save
       flash[:success] = '新規作成に成功しました。'
-      redirect_to @user
+      redirect_to user_url @user
     else
       render :new
     end
@@ -46,7 +46,7 @@ class UsersController < ApplicationController
   private
   
     def user_params
-      params.require(:users).permit(:name, :email, :password, :password_confirmation)
+      params.permit(:name, :email, :password, :password_confirmation)
     end
     
     def set_user

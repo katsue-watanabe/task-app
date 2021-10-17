@@ -10,8 +10,8 @@
 　　<center><%= link_to "アカウント作成", signup_path, class: "btn btn-lg btn-success" %></center>
 　　  <div class="form-group row justify-content-center">
 　　    <div>
-　        <%= link_to "ゲストログイン（管理者権限）", login_path, class: "btn btn-md btn-danger" %>
-　        <%= link_to "ゲストログイン（一般権限）", login_path, class: "btn btn-md btn-warning" %>
+　        <%= link_to "ゲストログイン（管理者権限）", login_path(current_user), class: "btn btn-md btn-danger" %>
+　        <%= link_to "ゲストログイン（一般権限）", login_path(current_user), class: "btn btn-md btn-warning" %>
 　      </div>
 　　  </div>
     </div>

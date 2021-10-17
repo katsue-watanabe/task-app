@@ -1,30 +1,28 @@
 class TasksController < ApplicationController
   before_action :set_user
-  before_action :set_task, only: %i(show edit update destroy)
+  before_action :set_task, only: [:show, :edit, :update, :destroy]
   before_action :logged_in_user
   before_action :correct_user
   
   def index
-    @tasks = @user.tasks
+    @tasks = Task.all
   end
 
   def show
   end
 
   def new
-    if logged_in? && !current_user.admin?
-      flash[:info] = 'すでにログインしています。'	
-      redirect_to current_user	
-    end
+    @task = Task.new
   end
 
   def create
-    @task = @user.tasks.build(task_params)
+    @task = Task.new(task_params)
     if @task.save
       flash[:success] = "タスクを新規作成しました。"
       redirect_to user_tasks_url @user
     else
-      render :new
+      render :new_user_task
+      
     end
   end
 
