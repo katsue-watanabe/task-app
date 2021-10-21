@@ -4,8 +4,8 @@
 
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
-    <%= form_with(model: @task, url: user_path(@user, @task), local: true, method: :patch) do |f| %> 
-      <%= render partial: 'shared/error_messages', locals: { obj: @task } %>
+    <%= form_with(model: @task, local: true) do |f| %> 
+      <%= render 'shared/error_messages' %>
       
       <%= f.label :name, class: "label-form" %>
       <%= f.text_field :name, class: "form-control" %>
