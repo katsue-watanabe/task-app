@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   before_action :logged_in_user, only: [:show, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit,  :update]
   before_action :admin_user, only: :destroy
+  before_action :admin_or_correct_user, only: [:new, :show, :edit, :update, :destroy ]
   
   def index
     @users = User.paginate(page: params[:page], per_page: 20)
@@ -47,7 +48,7 @@ class UsersController < ApplicationController
   private
   
     def user_params
-      params.permit(:name, :email, :password, :password_confirmation)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
     
     def set_user
@@ -67,5 +68,12 @@ class UsersController < ApplicationController
     
     def admin_user
       redirect_to root_url unless current_user.admin?
+    end
+    
+    def admin_or_correct_user
+      unless current_user?(@user) || current_user.admin?
+      flash[:danger] = "権限がありません。"
+      redirect_to root_path
+      end
     end
 end
