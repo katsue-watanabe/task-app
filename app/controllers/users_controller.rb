@@ -45,7 +45,7 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
   
-  private
+   private
   
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
@@ -57,10 +57,11 @@ class UsersController < ApplicationController
     
     def logged_in_user
       unless logged_in?
-        flash[:danger] = "ログインしてください。"
-        redirect_to login_url
+      flash[:danger] = "ログインしてください。"
+      redirect_to login_url
       end
     end
+
     
     def correct_user
       redirect_to(root_url) unless current_user?(@user)

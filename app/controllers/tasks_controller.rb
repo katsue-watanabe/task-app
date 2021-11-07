@@ -1,8 +1,8 @@
 class TasksController < ApplicationController
-  before_action :set_user, only: [:new, :index, :create, :show, :edit, :update]
+  before_action :set_user, only: [:new, :index, :create, :show, :edit, :update, :destroy]
   before_action :admin_or_correct_user, only: [:new, :index, :create, :show, :edit, :update, :destroy]
   before_action :set_task, only: [:new, :create, :show, :edit, :update, :destroy]
-  before_action :logged_in_user
+  before_action :logged_in_user, only: [:show, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :show]
   
   def new
@@ -14,7 +14,7 @@ class TasksController < ApplicationController
     if @user.save
       log_in @user
       flash[:success] = "タスクを新規作成しました。"
-      redirect_to user_tasks_url
+      redirect_to user_tasks_url(@user, @task)
     else
       render :new
     end
