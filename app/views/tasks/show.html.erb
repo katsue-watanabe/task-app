@@ -16,8 +16,8 @@
           </tr>
           <tr>
             <th class="active"><%= Task.human_attribute_name :description %></th>
-            <td><%= @task.description %></td>
-            </td>
+            <td><%= text_url_to_link(h(@task.description)).html_safe %></td>
+            <td></td>
           </tr>
           <tr>
             <th class="active"><%= Task.human_attribute_name :created_at %></th>
